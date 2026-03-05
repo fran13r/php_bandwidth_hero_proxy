@@ -40,9 +40,9 @@ use staifa\php_bandwidth_hero_proxy\config;
 $config = config\create();
 
 if (!$config["target_url"] && $config["request_uri"] == "/") {
-    echo "bandwidth-hero-proxy";
-    return false;
-} else {
+    die("bandwidth-hero-proxy");
+}
+ else {
     if (is_array($config["target_url"])) {
         $config["target_url"] = join("&url=", $config["target_url"]);
     };
