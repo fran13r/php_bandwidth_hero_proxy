@@ -38,11 +38,12 @@ function send_request($config)
       "x-forwarded-for" => $_SERVER["HTTP_X_FORWARDED_FOR"] || $_SERVER["REMOTE_ADDR"] || $_SERVER["SERVER_ADDR"],
       "cookie" => $_SERVER["HTTP_COOKIE"],
       "dnt" => $_SERVER["HTTP_DNT"],
-      "referer" => $_SERVER["HTTP_REFERER"],
-      "user-agent" => "Bandwidth-Hero Compressor",
+      "referer" => $config["target_url"], // SPROOFS REFERER AS THE IMAGE ITSELF
+      "user-agent" => $_SERVER["HTTP_USER_AGENT"], // USES YOUR ACTUAL BROWSER AGENT
       "via" => "1.1 bandwidth-hero",
       "content-encoding" => "gzip"
     ];
+
 
     $ch = curl_init();
     doto(
