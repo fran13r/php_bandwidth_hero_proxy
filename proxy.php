@@ -13,10 +13,14 @@ function request_opts($request_headers, &$response_headers, $target_url)
       CURLOPT_HTTPHEADER => $request_headers,
       CURLOPT_URL => $target_url,
       CURLOPT_FOLLOWLOCATION => true,
-      /*CURLOPT_CONNECTTIMEOUT => 10,*/
+      CURLOPT_AUTOREFERER => true, // ADDS THE AUTOMATIC REFERER
+      CURLOPT_CONNECTTIMEOUT => 5,
+      CURLOPT_TIMEOUT => 10,
       CURLOPT_MAXREDIRS => 5,
-      CURLOPT_SSL_VERIFYPEER => 0,
+      CURLOPT_SSL_VERIFYPEER => false, // BYPASSES SSL CHECK
+      CURLOPT_SSL_VERIFYHOST => false, // BYPASSES HOST CHECK
       CURLOPT_RETURNTRANSFER => 1,
+      // ... keep the rest of your HEADERFUNCTION as is
       CURLOPT_FAILONERROR => 1,
       CURLOPT_HEADERFUNCTION => function ($curl, $header) use (&$response_headers) {
           $len = strlen($header);
